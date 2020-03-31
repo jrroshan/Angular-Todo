@@ -23,6 +23,12 @@ export class TodoService {
     return this.http.get<todo[]>(`${this.todoUrl}${this.todoLimit}`);
   }
 
+  //Delete Todo
+  deleteTodo(del: todo): Observable<todo> {
+    const url = `${this.todoUrl}/${del.id}`;
+    return this.http.delete<todo>(url, httpOptions);
+  }
+
   //To Send data
   toggleCompleted(dataIn: todo): Observable<any> {
     const url = `${this.todoUrl}/${dataIn.id}`;
