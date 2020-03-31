@@ -1,16 +1,15 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { todo } from '../../models/todos';
-import { TodoService } from '../../services/todo.service'
+import { Component, OnInit, Output } from "@angular/core";
+import { todo } from "../../models/todos";
+import { TodoService } from "../../services/todo.service";
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.css"]
 })
 export class TodoComponent implements OnInit {
-
   todos: todo[];
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.todoService.getTodo().subscribe(getDataFromServer => {
@@ -25,4 +24,9 @@ export class TodoComponent implements OnInit {
     this.todoService.deleteTodo(del).subscribe();
   }
 
+  addTodo(add: todo) {
+    this.todoService.addTodo(add).subscribe(add => {
+      this.todos.push(add);
+    });
+  }
 }
